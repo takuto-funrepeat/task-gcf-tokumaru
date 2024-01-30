@@ -1,0 +1,1 @@
+gcloud functions deploy backup_gcf_call --gen2 --runtime nodejs20 --region us-central1 --trigger-http --allow-unauthenticated --set-env-vars BUBBLE_API_URL=https://belong-dashboard-pj.bubbleapps.io/version-3jy3/api/1.1/wf/,BEARER_TOKEN=5a1da08ce9fd930799936a368aac3c2d,BUCKET_NAME=task-gcf-log_save_tokumaru
