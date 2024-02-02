@@ -2,7 +2,6 @@ require('dotenv').config();
 const axios       = require('axios');
 const { Storage } = require('@google-cloud/storage');
 
-//test
 exports.backup_gcf_call = async (req, res) => {
     let logData = ''; // Variable to store log data
 
