@@ -24,4 +24,4 @@ jobs:
     - name: Deploy to Google Cloud Functions
       if: github.ref == 'refs/heads/main'
       run: |
-        gcloud functions deploy backup_gcf_call --entry-point backup_gcf_call --runtime nodejs20 --trigger-http --allow-unauthenticated --region us-central1
+        gcloud functions deploy backup_gcf_call --entry-point backup_gcf_call --runtime nodejs20 --trigger-http --allow-unauthenticated --region us-central1 --timeout=3600s --gen2
