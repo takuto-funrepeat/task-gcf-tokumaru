@@ -63,7 +63,7 @@ exports.backup_gcf_call = async (req, res) => {
         log('Received data from Bubble delete API:', count);
 
         // Upload log data to GCS
-        const logFile = myBucket.file(`log_${from.replace(/\//g, '')}_${until.replace(/\//g, '')}.txt`);
+        const logFile = myBucket.file(`Process_Log_${from.replace(/\//g, '')}_${until.replace(/\//g, '')}.txt`);
 
         try {
             await logFile.save(logData);
