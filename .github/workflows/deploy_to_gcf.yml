@@ -30,7 +30,3 @@ jobs:
       if: github.ref == 'refs/heads/main'
       run: |
         gcloud functions deploy backup_gcf_call --timeout=3600s --gen2 --runtime nodejs20 --region us-central1 --trigger-http --allow-unauthenticated
-
-    if [ $? -ne 0 ]; then
-    echo "デプロイ中にエラーが発生しましたが、続行します。"
-fi
