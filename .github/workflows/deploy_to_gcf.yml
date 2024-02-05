@@ -4,10 +4,10 @@ on:
   push:
     branches:
       - main
+      - fix
 
 jobs:
   deploy:
-    name: Deploy Function
     runs-on: ubuntu-latest
 
     steps:
@@ -17,11 +17,16 @@ jobs:
     - name: Set up Cloud SDK
       uses: google-github-actions/setup-gcloud@v0.2.0
       with:
-        project_id: funrepeat-assignment
         service_account_key: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_JSON }}
+        project_id: funrepeat-assignment
         export_default_credentials: true
 
-    - name: Deploy to Google Cloud Functions
+    - name: Deploy to GCF (fix branch)
+      if: github.ref == 'refs/heads/fix'
+      run: |
+        gcloud functions deploy backup_gcf_call --timeout=3600s --gen2 --runtime nodejs20 --region us-central1 --trigger-http --allow-unauthenticated
+
+    - name: Deploy to GCF (main branch)
       if: github.ref == 'refs/heads/main'
       run: |
-        gcloud functions deploy backup_gcf_call --entry-point backup_gcf_call --runtime nodejs20 --trigger-http --allow-unauthenticated --region us-central1 --timeout=3600s --gen2
+        gcloud functions deploy backup_gcf_call --timeout=3600s --gen2 --runtime nodejs20 --region us-central1 --trigger-http --allow-unauthenticated
